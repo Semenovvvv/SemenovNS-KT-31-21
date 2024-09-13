@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
 using SemenovNS_31_21.Database;
+using SemenovNS_31_21.Middlewares;
+using SemenovNS_31_21.ServiceExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,8 @@ try
     builder.Services.AddDbContext<StudentDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+    builder.Services.AddServices();
+
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -33,6 +37,8 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+
+    app.UseMiddleware<ExceptionHandlerMiddleware>();
 
     app.UseAuthorization();
 

@@ -6,11 +6,11 @@ namespace SemenovNS_31_21.Database
 {
     public class StudentDbContext : DbContext
     {
-        DbSet<Student> Students { get; set; }
-        DbSet<Group> Groups { get; set; }
-        DbSet<Disciplince> Disciplinces { get; set; }
-        DbSet<Mark> Marks { get; set; }
-        DbSet<Test> Tests { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Disciplince> Disciplinces { get; set; }
+        public DbSet<Mark> Marks { get; set; }
+        public DbSet<Test> Tests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,7 +25,5 @@ namespace SemenovNS_31_21.Database
         {
             
         }  
-
-
     }
 }
