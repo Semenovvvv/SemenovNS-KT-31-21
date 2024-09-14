@@ -55,5 +55,14 @@ namespace SemenovNS_31_21.Controllers
                 return Ok(response);
             return Ok(new { Success = false, Message = "Группа студента не найдена" });
         }
+
+        [HttpDelete("DeleteGroup")]
+        public async Task<IActionResult> DeleteGroup(int id)
+        {
+            var response = (_groupsService.DeleteGroup(id));
+            if (response != null) 
+                return Ok(response);
+            return Ok(new { Success = false, Message = "Группа не найдена" });
+        }
     }
 }

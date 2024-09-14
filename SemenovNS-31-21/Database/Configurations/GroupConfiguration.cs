@@ -24,6 +24,9 @@ namespace SemenovNS_31_21.Database.Configurations
                 .HasColumnName("name")
                 .HasComment("Название группы");
 
+            builder.HasIndex(g => g.Name)
+                .IsUnique();
+
             builder.HasMany(g => g.Students)
                 .WithOne(s => s.Group);
 
