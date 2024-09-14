@@ -29,6 +29,7 @@ namespace SemenovNS_31_21.Services
             var group = await GetGroupById(id);
             if (group != null)
             {
+                _dbContext.Groups.Attach(group);
                 _dbContext.Groups.Remove(group);
                 await _dbContext.SaveChangesAsync();
             }
@@ -61,7 +62,7 @@ namespace SemenovNS_31_21.Services
         {
             var group =  await _dbContext.Groups
                 .AsNoTracking()
-                .FirstOrDefaultAsync(g => g.Name == name) ?? new Group();
+                .FirstOrDefaultAsync(g => g.Name == name);
 
             return group;
         }
