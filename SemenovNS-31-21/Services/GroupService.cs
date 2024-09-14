@@ -14,42 +14,49 @@ namespace SemenovNS_31_21.Services
             _dbContext = dbContext;
         }
 
-        public async Task AddGroup(string name)
+        public async Task<bool> AddGroupAsync(string name)
         {
+            if (await _dbContext.Groups.FirstOrDefaultAsync(x => x.Name == name) != null)
+            {
+                return false;
+            }
+
             var group = new Group { Name = name };
-            if (_dbContext.Groups.FirstOrDefaultAsync(x => x.Name == group.Name) != null)
-            {
-                await _dbContext.Groups.AddAsync(group);
-                await _dbContext.SaveChangesAsync();
-            }
+            await _dbContext.Groups.AddAsync(group);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
-        public async Task DeleteGroup(int id)
+        public async Task<bool> DeleteGroupAsync(int id)
         {
-            var group = await GetGroupById(id);
-            if (group != null)
-            {
-                _dbContext.Groups.Attach(group);
-                _dbContext.Groups.Remove(group);
-                await _dbContext.SaveChangesAsync();
-            }
+            var group = await _dbContext.Groups.FindAsync(id);
+
+            if (group == null)
+                return false;
+
+            _dbContext.Groups.Remove(group);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
-        public async Task<Group> EditGroup(int id, string newName)
+        public async Task<bool> UpdateGroupAsync(int id, string name)
         {
-            var group = await GetGroupById(id);
-            
-            if (group != null)
+            var group = await _dbContext.Groups.FindAsync(id);
+
+            if (group == null)
             {
-                group.Name = newName;
-                await _dbContext.SaveChangesAsync();
-                return group;
+                return false;
             }
 
-            throw new NullReferenceException();
+            group.Name = name;
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
-        public async Task<Group> GetGroupById(int id)
+        public async Task<Group> GetGroupByIdAsync(int id)
         {
             var group = await _dbContext.Groups
                 .AsNoTracking()
@@ -58,7 +65,7 @@ namespace SemenovNS_31_21.Services
             return group;
         }
 
-        public async Task<Group> GetGroupByName(string name)
+        public async Task<Group> GetGroupByNameAsync(string name)
         {
             var group =  await _dbContext.Groups
                 .AsNoTracking()
@@ -67,7 +74,7 @@ namespace SemenovNS_31_21.Services
             return group;
         }
 
-        public async Task<List<Group>> GetGroups()
+        public async Task<List<Group>> GetGroupsAsync()
         {
             return await _dbContext.Groups
                 .AsNoTracking()

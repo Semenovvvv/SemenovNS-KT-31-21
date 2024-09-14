@@ -15,20 +15,21 @@ namespace SemenovNS_31_21.Services
             _dbContext = dbContext;
         }
 
-        public async Task<ICollection<Student>> GetStudents()
+        public async Task<ICollection<Student>> GetStudentsAsync()
         {
-            return await _dbContext.Students.ToListAsync();
+            var student = await _dbContext.Students.ToListAsync();
+            return student;
         }
 
-        public async Task<Student> AddStudent(CreateStudentDto dto)
+        public async Task<Student> AddStudentAsync(CreateStudentDto dto)
         {
             var student = new Student
             {
-                Surname = dto.surname,
-                Name = dto.name,
-                Patronymic = dto.patronymic,
-                Age = dto.age,
-                GroupId = dto.groupId,
+                Surname = dto.Surname,
+                Name = dto.Name,
+                Patronymic = dto.Patronymic,
+                Age = dto.Age,
+                GroupId = dto.GroupId,
             };
             await _dbContext.Students.AddAsync(student);
             await _dbContext.SaveChangesAsync();
@@ -36,21 +37,38 @@ namespace SemenovNS_31_21.Services
             return student;
         }
 
-        public async Task DeleteStudent(int id)
+        public async Task<bool> DeleteStudentAsync(int id)
         {
-            var student = await _dbContext.Students.FirstOrDefaultAsync(x => x.Id == id);
+            var student = await _dbContext.Students.FindAsync(id);
+
+            if (student == null)
+            {
+                return false;
+            }
             _dbContext.Remove(student);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
-        public Task EditStudent(int id)
+        public async Task<bool> UpdateStudentAsync(int id, UpdateStudentDto dto)
         {
-            throw new NotImplementedException();
-        }
+            var student = await _dbContext.Students.FindAsync(id);
 
-        public async Task<Student> GetStudentById(int id)
-        {
-            return await _dbContext.Students
-                .FirstOrDefaultAsync(x => x.Id == id);
+            if (student == null)
+            {
+                return false;
+            }
+            
+            student.Surname = dto.Surname;
+            student.Name = dto.Name;
+            student.Patronymic = dto.Patronymic;
+            student.Age = dto.Age;
+            student.GroupId = dto.GroupId;
+
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
     }
 }

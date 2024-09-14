@@ -4,16 +4,16 @@ namespace SemenovNS_31_21.Interfaces
 {
     public interface IGroupService
     {
-        public Task AddGroup(string name);
+        public Task<bool> AddGroupAsync(string name);
 
-        public Task DeleteGroup(int id);
+        public Task<bool> DeleteGroupAsync(int id);
 
-        public Task<Group> EditGroup(int id, string newName);
+        public Task<bool> UpdateGroupAsync(int id, string newName);
 
-        public Task<Group> GetGroupById(int id);
+        public Task<Group> GetGroupByIdAsync(int id);
 
-        public Task<Group> GetGroupByName(string name);
+        public Task<Group> GetGroupByNameAsync(string name);
 
-        public Task<List<Group>> GetGroups();
+        public Task<List<Group>> GetGroupsAsync();
     }
 }

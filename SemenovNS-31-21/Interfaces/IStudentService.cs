@@ -5,10 +5,9 @@ namespace SemenovNS_31_21.Interfaces
 {
     public interface IStudentService
     {
-        public Task<ICollection<Student>> GetStudents();
-        public Task<Student> GetStudentById(int id);
-        public Task<Student> AddStudent(CreateStudentDto dto);
-        public Task EditStudent(int id);
-        public Task DeleteStudent(int id);
+        public Task<ICollection<Student>> GetStudentsAsync();
+        public Task<Student> AddStudentAsync(CreateStudentDto dto);
+        public Task<bool> UpdateStudentAsync(int id, UpdateStudentDto dto);
+        public Task<bool> DeleteStudentAsync(int id);
     }
 }
