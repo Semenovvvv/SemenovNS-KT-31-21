@@ -42,7 +42,7 @@ namespace SemenovNS_31_21.Database.Configurations
 
             builder.HasIndex(m => m.StudentId, $"idx_{TableName}_fk_student_id");
 
-            builder.HasOne(m => m.Disciplince)
+            builder.HasOne(m => m.Discipline)
                 .WithMany(d => d.Marks)
                 .HasForeignKey(m => m.DisciplineId)
                 .HasConstraintName("fk_discipline_id");
@@ -54,7 +54,7 @@ namespace SemenovNS_31_21.Database.Configurations
             builder.Navigation(t => t.Student)
                 .AutoInclude();
 
-            builder.Navigation(t => t.Disciplince)
+            builder.Navigation(t => t.Discipline)
                 .AutoInclude();
         }
     }

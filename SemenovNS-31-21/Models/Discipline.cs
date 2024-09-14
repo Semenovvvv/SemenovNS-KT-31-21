@@ -1,6 +1,6 @@
 ﻿namespace SemenovNS_31_21.Models
 {
-    public class Disciplince
+    public class Discipline
     {
         public int Id { get; set; }
         public string Name { get; set; }

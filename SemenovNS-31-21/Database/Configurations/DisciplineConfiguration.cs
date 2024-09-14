@@ -4,10 +4,10 @@ using SemenovNS_31_21.Models;
 
 namespace SemenovNS_31_21.Database.Configurations
 {
-    public class DisciplineConfiguration : IEntityTypeConfiguration<Disciplince>
+    public class DisciplineConfiguration : IEntityTypeConfiguration<Discipline>
     {
         private const string TableName = "disciplines";
-        public void Configure(EntityTypeBuilder<Disciplince> builder)
+        public void Configure(EntityTypeBuilder<Discipline> builder)
         {
             builder.HasKey(d => d.Id)
                 .HasName($"pk_{TableName}_id");
@@ -24,10 +24,10 @@ namespace SemenovNS_31_21.Database.Configurations
                 .HasComment("Название дисциплины");
 
             builder.HasMany(d => d.Marks)
-                .WithOne(m => m.Disciplince);
+                .WithOne(m => m.Discipline);
 
             builder.HasMany(d => d.Tests)
-                .WithOne(t => t.Disciplince);
+                .WithOne(t => t.Discipline);
         }
     }
 }

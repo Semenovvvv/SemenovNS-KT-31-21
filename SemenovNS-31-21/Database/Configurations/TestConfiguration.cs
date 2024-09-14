@@ -40,14 +40,14 @@ namespace SemenovNS_31_21.Database.Configurations
                 .HasForeignKey(t => t.StudentId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(t => t.Disciplince)
+            builder.HasOne(t => t.Discipline)
                 .WithMany(s => s.Tests)
                 .HasForeignKey(t => t.DisciplineId);
 
             builder.Navigation(t => t.Student)
                 .AutoInclude();
 
-            builder.Navigation(t => t.Disciplince)
+            builder.Navigation(t => t.Discipline)
                 .AutoInclude();
         }
     }

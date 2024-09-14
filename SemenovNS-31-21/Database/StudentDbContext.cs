@@ -8,7 +8,7 @@ namespace SemenovNS_31_21.Database
     {
         public DbSet<Student> Students { get; set; }
         public DbSet<Group> Groups { get; set; }
-        public DbSet<Disciplince> Disciplinces { get; set; }
+        public DbSet<Discipline> Disciplines { get; set; }
         public DbSet<Mark> Marks { get; set; }
         public DbSet<Test> Tests { get; set; }
 
