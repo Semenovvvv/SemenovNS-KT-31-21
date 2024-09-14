@@ -10,30 +10,57 @@ namespace SemenovNS_31_21.Database.Configurations
 
         public void Configure(EntityTypeBuilder<Student> builder)
         {
-            builder.HasKey(s => s.Id);
+            builder.HasKey(s => s.Id)
+                .HasName($"pk_{TableName}_id");
 
             builder.Property(s => s.Id)
-                .ValueGeneratedOnAdd();
+                .ValueGeneratedOnAdd()
+                .HasColumnName("id")
+                .HasComment("Идентификатор студента");
 
             builder.Property(s => s.Surname)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .HasColumnName("surname")
+                .HasComment("Фамилия");
 
             builder.Property(s => s.Name)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .HasColumnName("name")
+                .HasComment("Имя");
 
             builder.Property(s => s.Patronymic)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .HasColumnName("patronymic")
+                .HasComment("Отчество");
+
+            builder.Property(s => s.Age)
+                .HasColumnName("age")
+                .HasComment("Возраст");
 
             builder.Property(s => s.GroupId)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnName("group_id")
+                .HasComment("Идентификатор группы");
 
             builder.HasOne(s => s.Group)
                 .WithMany(g => g.Students)
                 .HasForeignKey(s => s.GroupId)
+                .HasConstraintName("fk_group_id")
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasIndex(s => s.GroupId, $"idx_{TableName}_fk_group_id");
+
+            builder.Navigation(s => s.Marks)
+                .AutoInclude();
+
+            builder.Navigation(s => s.Tests)
+                .AutoInclude();
+
+            builder.Navigation(s => s.Group)
+                .AutoInclude();
         }
     }
 }
