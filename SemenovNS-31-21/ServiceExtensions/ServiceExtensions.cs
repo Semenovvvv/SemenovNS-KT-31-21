@@ -10,6 +10,7 @@ namespace SemenovNS_31_21.ServiceExtensions
             services.AddScoped<IGroupService, GroupService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IDisciplineService, DisciplineService>();
+            services.AddScoped<IMarkService, MarkService>();
 
             return services;
         }
