@@ -35,7 +35,7 @@ namespace SemenovNS_31_21.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasColumnName("c_name")
+                        .HasColumnName("name")
                         .HasComment("Название дисциплины");
 
                     b.HasKey("Id")
@@ -58,7 +58,7 @@ namespace SemenovNS_31_21.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasColumnName("c_name")
+                        .HasColumnName("name")
                         .HasComment("Название группы");
 
                     b.HasKey("Id")
@@ -87,7 +87,7 @@ namespace SemenovNS_31_21.Migrations
 
                     b.Property<int>("Result")
                         .HasColumnType("integer")
-                        .HasColumnName("n_result")
+                        .HasColumnName("result")
                         .HasComment("Оценка");
 
                     b.Property<int>("StudentId")
@@ -120,7 +120,7 @@ namespace SemenovNS_31_21.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("integer")
-                        .HasColumnName("n_age")
+                        .HasColumnName("age")
                         .HasComment("Возраст");
 
                     b.Property<int>("GroupId")
@@ -132,21 +132,21 @@ namespace SemenovNS_31_21.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasColumnName("c_name")
+                        .HasColumnName("name")
                         .HasComment("Имя");
 
                     b.Property<string>("Patronymic")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasColumnName("c_patronymic")
+                        .HasColumnName("patronymic")
                         .HasComment("Отчество");
 
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasColumnName("c_surname")
+                        .HasColumnName("surname")
                         .HasComment("Фамилия");
 
                     b.HasKey("Id")
@@ -175,7 +175,7 @@ namespace SemenovNS_31_21.Migrations
                     b.Property<string>("Result")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("c_result")
+                        .HasColumnName("result")
                         .HasComment("Результат");
 
                     b.Property<int>("StudentId")

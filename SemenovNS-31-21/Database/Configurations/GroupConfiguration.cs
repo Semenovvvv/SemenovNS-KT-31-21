@@ -21,7 +21,7 @@ namespace SemenovNS_31_21.Database.Configurations
             builder.Property(g => g.Name)
                 .IsRequired()
                 .HasMaxLength(50)
-                .HasColumnName("c_name")
+                .HasColumnName("name")
                 .HasComment("Название группы");
 
             builder.HasIndex(g => g.Name)

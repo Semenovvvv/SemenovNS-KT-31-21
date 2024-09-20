@@ -16,9 +16,16 @@ namespace SemenovNS_31_21.Controllers
         }
 
         [HttpGet("GetStudents")]
-        public async Task<IActionResult> GetGroups()
+        public async Task<IActionResult> GetStudents()
         {
             var students = await _studentService.GetStudentsAsync();
+            return Ok(students);
+        }
+
+        [HttpGet("GetStudentsByGroupName")]
+        public async Task<IActionResult> GetStudentsByGroupName(string groupName)
+        {
+            var students = await _studentService.GetStudentsByGroupNameAsync(groupName);
             return Ok(students);
         }
 

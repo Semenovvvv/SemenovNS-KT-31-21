@@ -21,23 +21,23 @@ namespace SemenovNS_31_21.Database.Configurations
             builder.Property(s => s.Surname)
                 .IsRequired()
                 .HasMaxLength(50)
-                .HasColumnName("c_surname")
+                .HasColumnName("surname")
                 .HasComment("Фамилия");
 
             builder.Property(s => s.Name)
                 .IsRequired()
                 .HasMaxLength(50)
-                .HasColumnName("c_name")
+                .HasColumnName("name")
                 .HasComment("Имя");
 
             builder.Property(s => s.Patronymic)
                 .IsRequired()
                 .HasMaxLength(50)
-                .HasColumnName("c_patronymic")
+                .HasColumnName("patronymic")
                 .HasComment("Отчество");
 
             builder.Property(s => s.Age)
-                .HasColumnName("n_age")
+                .HasColumnName("age")
                 .HasComment("Возраст");
 
             builder.Property(s => s.GroupId)

@@ -20,7 +20,7 @@ namespace SemenovNS_31_21.Database.Configurations
             builder.Property(d => d.Name)
                 .IsRequired()
                 .HasMaxLength(50)
-                .HasColumnName("c_name")
+                .HasColumnName("name")
                 .HasComment("Название дисциплины");
 
             builder.ToTable(TableName)

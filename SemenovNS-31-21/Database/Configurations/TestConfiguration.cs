@@ -20,7 +20,7 @@ namespace SemenovNS_31_21.Database.Configurations
 
             builder.Property(t => t.Result)
                 .IsRequired()
-                .HasColumnName("c_result")
+                .HasColumnName("result")
                 .HasComment("Результат");
 
             builder.Property(t => t.StudentId)

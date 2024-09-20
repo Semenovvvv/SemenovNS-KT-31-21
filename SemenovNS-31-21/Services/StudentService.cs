@@ -21,6 +21,12 @@ namespace SemenovNS_31_21.Services
             return student;
         }
 
+        public async Task<ICollection<Student>> GetStudentsByGroupNameAsync(string groupName)
+        {
+            var students = await _dbContext.Students.Where(g => g.Group.Name == groupName).ToListAsync();
+            return students;
+        }
+
         public async Task<Student> AddStudentAsync(CreateStudentDto dto)
         {
             var student = new Student
@@ -59,7 +65,7 @@ namespace SemenovNS_31_21.Services
             {
                 return false;
             }
-            
+
             student.Surname = dto.Surname;
             student.Name = dto.Name;
             student.Patronymic = dto.Patronymic;
