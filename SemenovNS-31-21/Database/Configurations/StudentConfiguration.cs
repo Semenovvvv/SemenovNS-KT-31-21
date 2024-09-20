@@ -6,7 +6,7 @@ namespace SemenovNS_31_21.Database.Configurations
 {
     public class StudentConfiguration : IEntityTypeConfiguration<Student>
     {
-        private const string TableName = "students";
+        private const string TableName = "cd_students";
 
         public void Configure(EntityTypeBuilder<Student> builder)
         {
@@ -21,23 +21,23 @@ namespace SemenovNS_31_21.Database.Configurations
             builder.Property(s => s.Surname)
                 .IsRequired()
                 .HasMaxLength(50)
-                .HasColumnName("surname")
+                .HasColumnName("c_surname")
                 .HasComment("Фамилия");
 
             builder.Property(s => s.Name)
                 .IsRequired()
                 .HasMaxLength(50)
-                .HasColumnName("name")
+                .HasColumnName("c_name")
                 .HasComment("Имя");
 
             builder.Property(s => s.Patronymic)
                 .IsRequired()
                 .HasMaxLength(50)
-                .HasColumnName("patronymic")
+                .HasColumnName("c_patronymic")
                 .HasComment("Отчество");
 
             builder.Property(s => s.Age)
-                .HasColumnName("age")
+                .HasColumnName("n_age")
                 .HasComment("Возраст");
 
             builder.Property(s => s.GroupId)
@@ -45,13 +45,15 @@ namespace SemenovNS_31_21.Database.Configurations
                 .HasColumnName("group_id")
                 .HasComment("Идентификатор группы");
 
-            builder.HasOne(s => s.Group)
+            builder.ToTable(TableName)
+                .HasOne(s => s.Group)
                 .WithMany(g => g.Students)
                 .HasForeignKey(s => s.GroupId)
                 .HasConstraintName("fk_group_id")
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasIndex(s => s.GroupId, $"idx_{TableName}_fk_group_id");
+            builder.ToTable(TableName)
+                .HasIndex(s => s.GroupId, $"idx_{TableName}_fk_group_id");
 
             builder.Navigation(s => s.Marks)
                 .AutoInclude();

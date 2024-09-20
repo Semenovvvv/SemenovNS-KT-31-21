@@ -7,7 +7,7 @@ namespace SemenovNS_31_21.Database.Configurations
 {
     public class GroupConfiguration : IEntityTypeConfiguration<Group>
     {
-        private const string TableName = "groups";
+        private const string TableName = "cd_groups";
         public void Configure(EntityTypeBuilder<Group> builder)
         {
             builder.HasKey(g => g.Id)
@@ -21,16 +21,18 @@ namespace SemenovNS_31_21.Database.Configurations
             builder.Property(g => g.Name)
                 .IsRequired()
                 .HasMaxLength(50)
-                .HasColumnName("name")
+                .HasColumnName("c_name")
                 .HasComment("Название группы");
 
             builder.HasIndex(g => g.Name)
                 .IsUnique();
 
-            builder.HasMany(g => g.Students)
+            builder.ToTable(TableName)
+                .HasMany(g => g.Students)
                 .WithOne(s => s.Group);
 
-            builder.Navigation(g => g.Students)
+            builder.ToTable(TableName)
+                .Navigation(g => g.Students)
                 .AutoInclude();
         }
     }

@@ -7,7 +7,7 @@ namespace SemenovNS_31_21.Database.Configurations
 {
     public class TestConfiguration : IEntityTypeConfiguration<Test>
     {
-        private const string TableName = "tests";
+        private const string TableName = "cd_tests";
         public void Configure(EntityTypeBuilder<Test> builder)
         {
             builder.HasKey(t => t.Id)
@@ -20,7 +20,7 @@ namespace SemenovNS_31_21.Database.Configurations
 
             builder.Property(t => t.Result)
                 .IsRequired()
-                .HasColumnName("result")
+                .HasColumnName("c_result")
                 .HasComment("Результат");
 
             builder.Property(t => t.StudentId)
@@ -35,12 +35,14 @@ namespace SemenovNS_31_21.Database.Configurations
 
             builder.HasCheckConstraint("ck_tests_result", "\"result\" IN ('Зачет', 'Незачет')");
 
-            builder.HasOne(t => t.Student)
+            builder.ToTable(TableName)
+                .HasOne(t => t.Student)
                 .WithMany(s => s.Tests)
                 .HasForeignKey(t => t.StudentId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(t => t.Discipline)
+            builder.ToTable(TableName)
+                .HasOne(t => t.Discipline)
                 .WithMany(s => s.Tests)
                 .HasForeignKey(t => t.DisciplineId);
 

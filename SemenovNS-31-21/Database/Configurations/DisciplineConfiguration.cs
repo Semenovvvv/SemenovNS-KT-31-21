@@ -6,7 +6,7 @@ namespace SemenovNS_31_21.Database.Configurations
 {
     public class DisciplineConfiguration : IEntityTypeConfiguration<Discipline>
     {
-        private const string TableName = "disciplines";
+        private const string TableName = "cd_disciplines";
         public void Configure(EntityTypeBuilder<Discipline> builder)
         {
             builder.HasKey(d => d.Id)
@@ -20,13 +20,15 @@ namespace SemenovNS_31_21.Database.Configurations
             builder.Property(d => d.Name)
                 .IsRequired()
                 .HasMaxLength(50)
-                .HasColumnName("name")
+                .HasColumnName("c_name")
                 .HasComment("Название дисциплины");
 
-            builder.HasMany(d => d.Marks)
+            builder.ToTable(TableName)
+                .HasMany(d => d.Marks)
                 .WithOne(m => m.Discipline);
 
-            builder.HasMany(d => d.Tests)
+            builder.ToTable(TableName)
+                .HasMany(d => d.Tests)
                 .WithOne(t => t.Discipline);
         }
     }
