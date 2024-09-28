@@ -25,6 +25,11 @@ namespace SemenovNS_31_21.Services
                 return false;
             }
 
+            if (await _dbContext.Marks.FirstOrDefaultAsync(x => x.Student.Id == student.Id && x.DisciplineId == discipline.Id) != null)
+            {
+                return false;
+            }
+
             var mark = new Mark
             {
                 Result = dto.Result,
@@ -38,14 +43,14 @@ namespace SemenovNS_31_21.Services
             return true;
         }
 
-        public async Task<bool> UpdateMarkAsync(int markId, MarkDto dto)
+        public async Task<bool> UpdateMarkAsync(MarkDto dto)
         {
-            var mark = await _dbContext.Marks.FindAsync(markId);
+            //var mark = await _dbContext.Marks.FindAsync(markId);
 
-            if (mark == null)
-            {
-                return false;
-            }
+            //if (mark == null)
+            //{
+            //    return false;
+            //}
 
             var student = await _dbContext.Students.FindAsync(dto.StudentId);
             var discipline = await _dbContext.Disciplines.FindAsync(dto.DisciplineId);
@@ -54,6 +59,8 @@ namespace SemenovNS_31_21.Services
             {
                 return false;
             }
+
+            var mark = await _dbContext.Marks.FirstOrDefaultAsync(x => x.StudentId == student.Id && x.DisciplineId == discipline.Id);
 
             mark.Result = dto.Result;
             mark.StudentId = dto.StudentId;

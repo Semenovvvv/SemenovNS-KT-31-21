@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using SemenovNS_31_21.Database.Helpers;
 using SemenovNS_31_21.Models;
 
 namespace SemenovNS_31_21.Database.Configurations
@@ -20,17 +21,18 @@ namespace SemenovNS_31_21.Database.Configurations
 
             builder.Property(t => t.Result)
                 .IsRequired()
-                .HasColumnName("result")
+                .HasColumnType(ColumnType.String)
+                .HasColumnName("c_result")
                 .HasComment("Результат");
 
             builder.Property(t => t.StudentId)
                 .IsRequired()
-                .HasColumnName("student_id")
+                .HasColumnName("f_student_id")
                 .HasComment("Идентификатор студента");
 
             builder.Property(t => t.DisciplineId)
                 .IsRequired()
-                .HasColumnName("discipline_id")
+                .HasColumnName("f_discipline_id")
                 .HasComment("Идентификатор дисциплины");
 
             builder.HasCheckConstraint("ck_tests_result", "\"result\" IN ('Зачет', 'Незачет')");

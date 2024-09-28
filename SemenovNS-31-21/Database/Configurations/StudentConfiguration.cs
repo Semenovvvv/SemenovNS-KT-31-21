@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SemenovNS_31_21.Database.Helpers;
 using SemenovNS_31_21.Models;
 
 namespace SemenovNS_31_21.Database.Configurations
@@ -20,29 +21,28 @@ namespace SemenovNS_31_21.Database.Configurations
 
             builder.Property(s => s.Surname)
                 .IsRequired()
+                .HasColumnType(ColumnType.String)
                 .HasMaxLength(50)
-                .HasColumnName("surname")
+                .HasColumnName("c_surname")
                 .HasComment("Фамилия");
 
             builder.Property(s => s.Name)
                 .IsRequired()
+                .HasColumnType(ColumnType.String)
                 .HasMaxLength(50)
-                .HasColumnName("name")
+                .HasColumnName("c_name")
                 .HasComment("Имя");
 
             builder.Property(s => s.Patronymic)
                 .IsRequired()
+                .HasColumnType(ColumnType.String)
                 .HasMaxLength(50)
-                .HasColumnName("patronymic")
+                .HasColumnName("c_patronymic")
                 .HasComment("Отчество");
-
-            builder.Property(s => s.Age)
-                .HasColumnName("age")
-                .HasComment("Возраст");
 
             builder.Property(s => s.GroupId)
                 .IsRequired()
-                .HasColumnName("group_id")
+                .HasColumnName("f_group_id")
                 .HasComment("Идентификатор группы");
 
             builder.ToTable(TableName)

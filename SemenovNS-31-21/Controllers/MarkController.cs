@@ -28,21 +28,21 @@ namespace SemenovNS_31_21.Controllers
 
             if (!result)
             {
-                return NotFound(new { Success = false, Message = "Студент или дисциплина не найдены" });
+                return NotFound(new { Success = false, Message = "Студент или дисциплина не найдены(или оценка уже существует)" });
             }
 
             return Ok(new { Success = true, Message = "Оценка успешно добавлена" });
         }
 
-        [HttpPut("UpdateMark/{id}")]
-        public async Task<IActionResult> UpdateMark(int id, [FromBody] MarkDto dto)
+        [HttpPut("UpdateMark")]
+        public async Task<IActionResult> UpdateMark([FromBody] MarkDto dto)
         {
             if (dto.Result < 2 || dto.Result > 5 || dto.StudentId <= 0 || dto.DisciplineId <= 0)
             {
                 return BadRequest(new { Success = false, Message = "Некорректные данные" });
             }
 
-            var result = await _markService.UpdateMarkAsync(id, dto);
+            var result = await _markService.UpdateMarkAsync(dto);
 
             if (!result)
             {

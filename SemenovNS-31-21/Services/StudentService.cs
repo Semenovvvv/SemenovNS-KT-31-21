@@ -34,7 +34,6 @@ namespace SemenovNS_31_21.Services
                 Surname = dto.Surname,
                 Name = dto.Name,
                 Patronymic = dto.Patronymic,
-                Age = dto.Age,
                 GroupId = dto.GroupId,
             };
             await _dbContext.Students.AddAsync(student);
@@ -69,7 +68,6 @@ namespace SemenovNS_31_21.Services
             student.Surname = dto.Surname;
             student.Name = dto.Name;
             student.Patronymic = dto.Patronymic;
-            student.Age = dto.Age;
             student.GroupId = dto.GroupId;
 
             await _dbContext.SaveChangesAsync();

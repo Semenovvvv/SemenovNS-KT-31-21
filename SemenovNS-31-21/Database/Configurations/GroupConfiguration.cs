@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using SemenovNS_31_21.Database.Helpers;
 using SemenovNS_31_21.Models;
 
 namespace SemenovNS_31_21.Database.Configurations
@@ -13,27 +14,26 @@ namespace SemenovNS_31_21.Database.Configurations
             builder.HasKey(g => g.Id)
                 .HasName($"pk_{TableName}_id");
 
-            builder.Property(g => g.Id)
+            builder.ToTable(TableName)
+                .Property(g => g.Id)
                 .ValueGeneratedOnAdd()
                 .HasColumnName("id")
                 .HasComment("Идентификатор группы");
 
-            builder.Property(g => g.Name)
+            builder.ToTable(TableName)
+                .Property(g => g.Name)
                 .IsRequired()
+                .HasColumnName("c_name")
+                .HasColumnType(ColumnType.String)
                 .HasMaxLength(50)
-                .HasColumnName("name")
                 .HasComment("Название группы");
 
-            builder.HasIndex(g => g.Name)
+            //builder.Navigation(g => g.Students)
+            //    .AutoInclude();
+
+            builder.ToTable(TableName)
+                .HasIndex(g => g.Name)
                 .IsUnique();
-
-            builder.ToTable(TableName)
-                .HasMany(g => g.Students)
-                .WithOne(s => s.Group);
-
-            builder.ToTable(TableName)
-                .Navigation(g => g.Students)
-                .AutoInclude();
         }
     }
 }
