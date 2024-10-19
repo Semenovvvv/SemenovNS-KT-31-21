@@ -38,7 +38,7 @@ namespace SemenovNS_31_21.Database.Configurations
 
             builder.ToTable(TableName)
                 .HasOne(m => m.Student)
-                .WithMany(s => s.Marks)
+                .WithMany()
                 .HasForeignKey(m => m.StudentId)
                 .HasConstraintName("fk_student_id")
                 .OnDelete(DeleteBehavior.Cascade);
@@ -48,7 +48,7 @@ namespace SemenovNS_31_21.Database.Configurations
 
             builder.ToTable(TableName)
                 .HasOne(m => m.Discipline)
-                .WithMany(d => d.Marks)
+                .WithMany()
                 .HasForeignKey(m => m.DisciplineId)
                 .HasConstraintName("fk_discipline_id");
 

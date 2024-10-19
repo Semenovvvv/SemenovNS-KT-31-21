@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SemenovNS_31_21.DTO.Marks;
 using SemenovNS_31_21.Interfaces;
-using SemenovNS_31_21.Services;
 
 namespace SemenovNS_31_21.Controllers
 {

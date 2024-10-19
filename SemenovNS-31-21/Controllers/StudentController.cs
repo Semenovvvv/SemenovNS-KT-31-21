@@ -30,16 +30,22 @@ namespace SemenovNS_31_21.Controllers
         }
 
         [HttpPost("AddStudent")]
-        public async Task<IActionResult> AddStudent(CreateStudentDto dto)
+        public async Task<IActionResult> AddStudent([FromBody] CreateStudentDto dto)
         {
+            if (string.IsNullOrWhiteSpace(dto.Name) || string.IsNullOrWhiteSpace(dto.Surname) || dto.GroupId <= 0)
+            {
+                return BadRequest(new { Success = false, Message = "Некорректные данные" });
+            }
+
             var student = await _studentService.AddStudentAsync(dto);
-            return Ok(student);
+
+            return Ok(new { Success = true, Message = "Студент успешно добавлен" });
         }
 
         [HttpPut("UpdateStudent/{id}")]
         public async Task<IActionResult> UpdateStudent(int id, [FromBody] UpdateStudentDto dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.Name) || string.IsNullOrWhiteSpace(dto.Surname) || dto.Age <= 0 || dto.GroupId <= 0)
+            if (string.IsNullOrWhiteSpace(dto.Name) || string.IsNullOrWhiteSpace(dto.Surname) || dto.GroupId <= 0)
             {
                 return BadRequest(new { Success = false, Message = "Некорректные данные" });
             }

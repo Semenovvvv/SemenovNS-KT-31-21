@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text.Json.Serialization;
 
 namespace SemenovNS_31_21.Models
 {
@@ -9,8 +9,7 @@ namespace SemenovNS_31_21.Models
         public string Name { get; set; }
         public string Patronymic { get; set; }
         public int GroupId { get; set; }
+        [JsonIgnore]
         public Group Group { get; set; }
-        public ICollection<Mark> Marks { get; set; }
-        public ICollection<Test> Tests { get; set; }
     }
 }

@@ -39,13 +39,13 @@ namespace SemenovNS_31_21.Database.Configurations
 
             builder.ToTable(TableName)
                 .HasOne(t => t.Student)
-                .WithMany(s => s.Tests)
+                .WithMany()
                 .HasForeignKey(t => t.StudentId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable(TableName)
                 .HasOne(t => t.Discipline)
-                .WithMany(s => s.Tests)
+                .WithMany()
                 .HasForeignKey(t => t.DisciplineId);
 
             builder.Navigation(t => t.Student)

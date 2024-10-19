@@ -47,19 +47,13 @@ namespace SemenovNS_31_21.Database.Configurations
 
             builder.ToTable(TableName)
                 .HasOne(s => s.Group)
-                .WithMany(g => g.Students)
+                .WithMany()
                 .HasForeignKey(s => s.GroupId)
                 .HasConstraintName("fk_group_id")
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable(TableName)
                 .HasIndex(s => s.GroupId, $"idx_{TableName}_fk_group_id");
-
-            builder.Navigation(s => s.Marks)
-                .AutoInclude();
-
-            builder.Navigation(s => s.Tests)
-                .AutoInclude();
 
             builder.Navigation(s => s.Group)
                 .AutoInclude();

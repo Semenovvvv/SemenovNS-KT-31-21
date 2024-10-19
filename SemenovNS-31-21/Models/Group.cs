@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace SemenovNS_31_21.Models
 {
@@ -6,7 +7,6 @@ namespace SemenovNS_31_21.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Student> Students { get; set; }
 
         public bool IsValidGroupName()
         {
