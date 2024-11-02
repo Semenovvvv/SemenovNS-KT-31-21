@@ -13,7 +13,7 @@ var logger = LogManager.Setup()
 
 try
 {
-
+    throw new;
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
 
