@@ -1,19 +1,15 @@
 ﻿using SemenovNS_31_21.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SemenovNS_31_21.Tests
+namespace SemenovNS_31_21.Tests.GroupTests
 {
-    public class GroupTests
+    public class GroupUnitTests
     {
         [Fact]
-        public void IsValidGroupName_KT3120_True()
+        public void IsValidGroupName_KT3121_True()
         {
             var group = new Group
             {
+                Id = 1,
                 Name = "КТ-31-21"
             };
 

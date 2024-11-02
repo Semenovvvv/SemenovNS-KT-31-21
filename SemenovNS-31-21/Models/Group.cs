@@ -10,7 +10,7 @@ namespace SemenovNS_31_21.Models
 
         public bool IsValidGroupName()
         {
-            return Regex.Match(Name, @"/\D*-\d*-\d\d/g").Success;
+            return Regex.Match(Name, @"\D*-\d*-\d\d").Success;
         }
     }
 }

@@ -11,5 +11,11 @@ namespace SemenovNS_31_21.Models
         public int GroupId { get; set; }
         [JsonIgnore]
         public Group Group { get; set; }
+
+        public bool IsForeigner()
+        {
+            return string.IsNullOrWhiteSpace(Patronymic) ? true : false;
+        }
     }
+    
 }
